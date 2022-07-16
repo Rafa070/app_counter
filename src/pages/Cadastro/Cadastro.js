@@ -1,53 +1,95 @@
-import React from "react"
-import {SafeAreaView, TextInput, StyleSheet, Image, Text, View, TouchableOpacity} from "react-native"
+import React, {useState, useEffect} from "react"
+import {KeyboardAvoidingView, TextInput, StyleSheet, Image, Text, View, TouchableOpacity} from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import firebase from "../../Config/firebase";
 
 
 
-export default function Cadastro() {
-  const navigation = useNavigation();
-  
+export default function Cadastro({navigation}) {
+  //const [user, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  //const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorCadastro, setErrorCadastro] = useState("");
+
+
+const cadastroFirebase = ()=>{
+  firebase.auth().createUserWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    let user = userCredential.user;
+    navigation.navigate("Login", {idUser: user.uid})
+  })
+  .catch((error) => {
+    setErrorCadastro(true)
+    let errorCode = error.code;
+    let errorMessage = error.message;
+  });
+}
+
+useEffect(()=>{
+
+}, []);
 
   return (
-    <SafeAreaView style={styles.Cadastro}>
+    <KeyboardAvoidingView style={styles.Cadastro}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      
       <Image
         style={styles.Logotipo}
         source={{
           uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/31ag8rfohun-75%3A81?alt=media&token=9197ebd6-c6dd-4173-897a-38749e128a3b",
         }}
       />
-      <View style={styles.Nome}>
-        <TextInput
-         style={styles.PlaceholderInput} 
-          placeholder="Nome">
-         </TextInput>
-      </View>
-
+      
       <View style={styles.Email}>
         <TextInput
          style={styles.PlaceholderInput} 
-          placeholder="Email">
-         </TextInput>
+          placeholder="Email"
+          type="text"
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          />
       </View>
 
       <View style={styles.Senha}>
         <TextInput
+        secureTextEntry={true}
          style={styles.PlaceholderInput} 
-          placeholder="Senha">
-         </TextInput>
+         onChangeText={(text) => setPassword(text)}
+         value={password}
+          placeholder="Senha"/>
       </View>
 
-      <View style={styles.ConfirmarSenha}>
-        <TextInput
-         style={styles.PlaceholderInput}
-         placeholder="Confirmar Senha">
-         </TextInput>
-      </View>
-      <View style={styles.Cadastrar}>
-        <Text style={styles.ButtonEntrar}>Entrar</Text>
-      </View>
-    </SafeAreaView>
+
+{errorCadastro === true
+?
+<View style={styles.contentAlert}>
+  <MaterialCommunityIcons
+  name="arrow-left-circle"
+  size={24}
+  color="red"/>
+  
+  <Text> Confira seus dados </Text>
+</View>
+:
+<View/>
+}
+{ email === "" || password === ""
+?
+<TouchableOpacity
+disabled={true}
+style={styles.Cadastrar}>
+<Text style={styles.ButtonEntrar}>Cadastrar</Text>
+</TouchableOpacity>
+:
+<TouchableOpacity
+style={styles.Cadastrar}
+onPress={cadastroFirebase}
+>
+<Text style={styles.ButtonEntrar}>Entrar</Text>
+</TouchableOpacity>
+}
+    </KeyboardAvoidingView>
   )
 }
 

@@ -28,6 +28,16 @@ useEffect(()=>{
 
 }, []);
 
+const redefinirSenha = ()=>{
+  firebase.auth().sendPasswordResetEmail(email)
+  .then(() => {
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+}
+
   return (
     <KeyboardAvoidingView 
    behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -41,7 +51,7 @@ useEffect(()=>{
       <View style={styles.Usuario}>
         <TextInput
          style={styles.PlaceholderInput} 
-          placeholder="Usuário"
+          placeholder="Email"
             type="text"
             onChangeText={(text) => setEmail(text)}
             value={email}
@@ -86,7 +96,11 @@ onPress={loginFirebase}
 <Text style={styles.ButtonEntrar}>Entrar</Text>
 </TouchableOpacity>
 }
-      <Text style={styles.EsqueceuSenha}>Esqueceu a Senha?</Text>
+
+      <TouchableOpacity>
+      <Text style={styles.EsqueceuSenha} onPress={redefinirSenha}>Esqueceu a Senha?</Text>
+      </TouchableOpacity>
+
       <Text style={styles.Cadastrar}>Não tem uma conta?</Text>
       <TouchableOpacity onPress={ () => navigation.navigate('Cadastro')}>
       <Text style={styles.Cadastre}>Cadastre-se</Text>
