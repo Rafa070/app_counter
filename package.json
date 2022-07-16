@@ -1,0 +1,47 @@
+{
+  "name": "myteacher_app",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
+    "@react-navigation/drawer": "^6.4.3",
+    "@react-navigation/native": "^6.0.10",
+    "@react-navigation/native-stack": "^6.6.2",
+    "expo": "~45.0.0",
+    "expo-status-bar": "~1.3.0",
+    "firebase": "^8.2.3",
+    "jest": "^26.6.3",
+    "jest-expo": "^45.0.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-native": "0.68.2",
+    "react-native-animatable": "^1.3.3",
+    "react-native-gesture-handler": "^2.5.0",
+    "react-native-safe-area-context": "4.2.4",
+    "react-native-screens": "~3.11.1",
+    "react-native-svg": "^12.3.0",
+    "react-native-svg-transformer": "^1.0.0",
+    "react-native-web": "0.17.7",
+    "yet": "^0.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@testing-library/react-native": "^10.1.1",
+    "react-test-renderer": "17"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ]
+  },
+  "private": true
+}
