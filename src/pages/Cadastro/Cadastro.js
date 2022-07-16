@@ -1,6 +1,9 @@
 import React from "react"
 import {SafeAreaView, TextInput, StyleSheet, Image, Text, View, TouchableOpacity} from "react-native"
 import { useNavigation } from "@react-navigation/native"
+import firebase from "../../Config/firebase";
+
+
 
 export default function Cadastro() {
   const navigation = useNavigation();
