@@ -37,7 +37,6 @@ const redefinirSenha = ()=>{
     var errorMessage = error.message;
   });
 }
-
   return (
     <KeyboardAvoidingView 
    behavior={Platform.OS === "ios" ? "padding" : "height"}
