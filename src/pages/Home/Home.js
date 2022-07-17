@@ -1,8 +1,9 @@
 import React from "react"
-import { StyleSheet, Image, Text, View, ImageBackground } from "react-native"
+import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native"
 import HomeSvg from './../../assets/Home.svg'
 
 export default function Home() {
+  
   return (
     <View style={styles.Home}>
       <View style={styles.Index}>
@@ -14,12 +15,11 @@ export default function Home() {
             }}
           />
           <Text style={styles.TextBemVindo}>Bem vindo(a), Usuário!</Text>
-          <Image
-            style={styles.Menu}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/rdtago5agnq-75%3A105?alt=media&token=132120cc-b1c0-4459-823d-45cb613e5c2b",
-            }}
-          />
+          <View style={styles.StyleLogout}>
+          <View style={styles.border}>
+            <Text style={styles.textlogout}>Logout</Text>
+          </View>
+          </View>
         <View style={styles.ImgHome}>
             <HomeSvg width={370} height={370}/>
         </View>
@@ -30,13 +30,17 @@ export default function Home() {
           Todos os direitos reservados a sool queijo 2022
         </Text>
       </View>
-      <View style={styles.CardDescript}>
-        <Text style={styles.description}>
-          O people Counter é um app que irá realizar contagens de pessoas no seu
-          evento através de um sensor ultrassônico auxiliando na estátística de
-          permanência ou evasão de um determinado evento cadastrado.
-        </Text>
-      </View>
+      <TouchableOpacity style={styles.Buttoms} onPress={ () => navigation.navigate('CadEvent')}>
+      <View style={styles.Frame3}>
+            <Text style={styles.textbuttomcadastrar}>Cadastrar Evento</Text>
+          </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.ButtomEvent} onPress={ () => navigation.navigate('EventCad')}>
+      <View style={styles.Frame4}>
+            <Text style={styles.textbuttomevent}>Eventos Cadastrados</Text>
+          </View>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -61,12 +65,12 @@ const styles = StyleSheet.create({
   },
   SubIndex: {
     position: "relative",
-    marginBottom: 130,
+    marginBottom: 30,
     borderBottomRightRadius: 40,
     borderBottomLeftRadius: 40,
     backgroundColor: "rgba(0,166,166,1)",
     width: 428,
-    height: 600,
+    height: 700,
   },
   Logotipo: {
     position: "absolute",
@@ -90,12 +94,32 @@ ImgHome: {
     width: 180,
     height: 60,
   },
-  Menu: {
-    position: "absolute",
-    top: 20,
-    left: 340,
-    width: 50,
-    height: 50,
+  StyleLogout: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    left: 125,
+    top: 28,
+  },
+  border: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: 7.5,
+    paddingRight: 7.5,
+    marginBottom: 480,
+    borderRadius: 5,
+    borderWidth: 2.5,
+    borderStyle: "solid",
+    borderColor: "rgba(255, 255, 255, 1)",
+    height: 40,
+  },
+  textlogout: {
+    fontSize: 20,
+    fontFamily: "Poppins, sans-serif",
+    fontWeight: "700",
+    color: "rgba(255, 255, 255, 1)",
   },
   TituloHome: {
     position: "absolute",
@@ -114,7 +138,7 @@ ImgHome: {
     color: "rgba(157,157,157,1)",
   },
 
-  CardDescript: {
+  Buttoms: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
@@ -128,19 +152,45 @@ ImgHome: {
     paddingRight: 9,
     borderRadius: 15,
     backgroundColor: "rgba(255, 255, 255, 1)",
-    shadowColor: "rgba(0,0,0,0.25)",
-    elevation: 0,
-    shadowOffset: { width: 0, height: 4 },
+   
     width: 360,
-    height: 152,
+    height: 15,
   },
-  description: {
+  textbuttomcadastrar: {
     fontSize: 18,
     fontWeight: "700",
     color: "rgba(67,66,66,1)",
     width: 350,
     height: 150,
-    top: 25,
-    left: 5,
+    left: 100,
+    top: 76,
+  },
+
+  ButtomEvent: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: 600,
+    left: 15,
+    paddingTop: 9,
+    paddingBottom: 40,
+    paddingLeft: 9,
+    paddingRight: 9,
+    borderRadius: 15,
+    backgroundColor: "rgba(255, 255, 255, 1)",
+   
+    width: 360,
+    height: 15,
+  },
+  textbuttomevent: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "rgba(67,66,66,1)",
+    width: 350,
+    height: 150,
+    left: 85,
+    top: 78,
   },
 })
