@@ -1,9 +1,19 @@
 import React from "react"
 import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native"
+import { useNavigation } from "@react-navigation/native";
 import HomeSvg from './../../assets/Home.svg'
+import firebase from "firebase";
 
 export default function Home() {
-  
+  const navigation = useNavigation();
+
+const Logout = () => {
+  firebase.auth().signOut().then(() => {
+    navigation.navigate("Welcome")
+  }).catch((error) => {
+  });
+}
+
   return (
     <View style={styles.Home}>
       <View style={styles.Index}>
@@ -14,12 +24,13 @@ export default function Home() {
               uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/rdtago5agnq-75%3A108?alt=media&token=d7fb2260-54cf-48d0-a3d8-744b60ed3ca2",
             }}
           />
-          <Text style={styles.TextBemVindo}>Bem vindo(a), Usuário!</Text>
-          <View style={styles.StyleLogout}>
+          <Text style={styles.TextBemVindo}>Bem vindo(a)</Text>
+
+          <TouchableOpacity style={styles.StyleLogout} onPress={Logout}>
           <View style={styles.border}>
             <Text style={styles.textlogout}>Logout</Text>
           </View>
-          </View>
+          </TouchableOpacity>
         <View style={styles.ImgHome}>
             <HomeSvg width={370} height={370}/>
         </View>
@@ -31,15 +42,11 @@ export default function Home() {
         </Text>
       </View>
       <TouchableOpacity style={styles.Buttoms} onPress={ () => navigation.navigate('CadEvent')}>
-      <View style={styles.Frame3}>
             <Text style={styles.textbuttomcadastrar}>Cadastrar Evento</Text>
-          </View>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.ButtomEvent} onPress={ () => navigation.navigate('EventCad')}>
-      <View style={styles.Frame4}>
             <Text style={styles.textbuttomevent}>Eventos Cadastrados</Text>
-          </View>
       </TouchableOpacity>
     </View>
   )
