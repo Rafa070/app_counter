@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, Image, Text, View, TouchableOpacity } from "react-native"
+import { StyleSheet, Image, Text, View, TouchableOpacity, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native";
 import HomeSvg from './../../assets/Home.svg'
 import firebase from "firebase";
@@ -9,8 +9,10 @@ export default function Home() {
 
 const Logout = () => {
   firebase.auth().signOut().then(() => {
+    Alert.alert("Deslogado com Sucesso")
     navigation.navigate("Welcome")
   }).catch((error) => {
+    Alert.alert("Erro ao Deslogar")
   });
 }
 
@@ -124,7 +126,6 @@ ImgHome: {
   },
   textlogout: {
     fontSize: 20,
-    fontFamily: "Poppins, sans-serif",
     fontWeight: "700",
     color: "rgba(255, 255, 255, 1)",
   },

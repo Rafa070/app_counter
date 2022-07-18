@@ -1,18 +1,27 @@
 import React, {useState, useEffect} from "react"
-import {TextInput, StyleSheet, Image, Text, View, TouchableOpacity, KeyboardAvoidingView} from "react-native"
+import {TextInput, StyleSheet, Image, Text, View, TouchableOpacity, KeyboardAvoidingView, Alert, ActivityIndicator} from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import firebase from "../../Config/firebase"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
-
+import Loading from "../components/Loading"
 
 
 export default function Login({navigation}) {
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [errorLogin, setErrorLogin] = useState("");
+const {visible, setVisible} = useState(true);
+
+const Load = ()=>{
+  setVisible(true);
+  setTimeout(() => {
+    setVisible(false);
+    console.log('carregando')
+  }, 500);
+}
 
 const loginFirebase = ()=>{
-  firebase.auth().signInWithEmailAndPassword(email, password)
+firebase.auth().signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
     let user = userCredential.user;
     navigation.navigate("Home", {idUser: user.uid})
@@ -23,24 +32,30 @@ const loginFirebase = ()=>{
     let errorMessage = error.message;
   });
 }
-
 useEffect(()=>{
 
 }, []);
 
+
 const redefinirSenha = ()=>{
   firebase.auth().sendPasswordResetEmail(email)
   .then(() => {
+    Alert.alert("Acesse seu Email", "Um link para refefinir sua senha foi enviado para seu email")
   })
   .catch((error) => {
+    Alert.alert("Email não existe", "Não foi possível encontrar seu email em nosso banco de dados")
     var errorCode = error.code;
     var errorMessage = error.message;
   });
 }
+
+
   return (
     <KeyboardAvoidingView 
    behavior={Platform.OS === "ios" ? "padding" : "height"}
-    style={styles.Login}>
+    style={styles.Login}
+    keyboardVerticalOffset={80}
+    >
       <Image
         style={styles.Logotipo}
         source={{
@@ -67,14 +82,15 @@ const redefinirSenha = ()=>{
          />
       </View>
 
+
 {errorLogin === true
 ?
-<View style={styles.contentAlert}>
+<View style={styles.ErrorLogin}>
   <MaterialCommunityIcons
-  name="arrow-left-circle"
-  size={24}
+  name="alert-circle"
+  size={34}
   color="red"/>
-  <Text>Erro ao Logar</Text>
+  <Text style={styles.TextError}>Usuário ou senha incorretos</Text>
 </View>
 :
 <View/>
@@ -88,11 +104,13 @@ style={styles.Entrar}>
   <Text style={styles.ButtonEntrar}>Entrar</Text>
 </TouchableOpacity>
 :
+
 <TouchableOpacity
 style={styles.Entrar}
 onPress={loginFirebase}
 >
 <Text style={styles.ButtonEntrar}>Entrar</Text>
+<Loading visible={visible}/>
 </TouchableOpacity>
 }
 
@@ -104,6 +122,7 @@ onPress={loginFirebase}
       <TouchableOpacity onPress={ () => navigation.navigate('Cadastro')}>
       <Text style={styles.Cadastre}>Cadastre-se</Text>
       </TouchableOpacity>
+      
     </KeyboardAvoidingView>
   )
 }
@@ -203,6 +222,19 @@ const styles = StyleSheet.create({
     width: 138,
     height: 21,
   },
+ErrorLogin: {
+flexDirection: "row",
+position: "absolute",
+top: 310,
+left: 30,
+},
+
+TextError: {
+  fontSize: 24,
+  fontWeight: "700",
+  color:"red"
+},
+
   Cadastrar: {
   position: "absolute",
   top: 590,

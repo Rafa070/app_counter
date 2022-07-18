@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import {KeyboardAvoidingView, TextInput, StyleSheet, Image, Text, View, TouchableOpacity} from "react-native"
+import {KeyboardAvoidingView, TextInput, StyleSheet, Image, Text, View, TouchableOpacity, Alert} from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import firebase from "../../Config/firebase";
 
@@ -16,10 +16,12 @@ export default function Cadastro({navigation}) {
 const cadastroFirebase = ()=>{
   firebase.auth().createUserWithEmailAndPassword(email, password)
   .then((userCredential) => {
+    Alert.alert("Sucesso", "Usuário cadastrado com sucesso")
     let user = userCredential.user;
     navigation.navigate("Login", {idUser: user.uid})
   })
   .catch((error) => {
+    Alert.alert("Erro", "Não foi possível realizar o cadastro")
     setErrorCadastro(true)
     let errorCode = error.code;
     let errorMessage = error.message;
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
     width: 295,
     height: 200,
   },
-  Nome: {
+  /*Nome: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 1)",
     width: 366,
     height: 49,
-  },
+  },*/
   Email: {
     display: "flex",
     flexDirection: "row",
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
     width: 366,
     height: 49,
   },
-  ConfirmarSenha: {
+  /*ConfirmarSenha: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "flex-start",
@@ -187,7 +189,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 1)",
     width: 366,
     height: 49,
-  },
+  },*/
 
   Cadastrar: {
     display: "flex",
@@ -195,7 +197,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
-    top: 585,
+    top: 520,
     left: 16,
     paddingTop: 9,
     paddingBottom: 9,
