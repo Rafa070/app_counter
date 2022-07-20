@@ -88,7 +88,7 @@ style={styles.Cadastrar}>
 style={styles.Cadastrar}
 onPress={cadastroFirebase}
 >
-<Text style={styles.ButtonEntrar}>Entrar</Text>
+<Text style={styles.ButtonEntrar}>Cadastrar</Text>
 </TouchableOpacity>
 }
     </KeyboardAvoidingView>
