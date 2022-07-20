@@ -1,172 +1,141 @@
-import React from "react"
-import { StyleSheet, Image, Text, View, ImageBackground } from "react-native"
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  StyleSheet
+} from "react-native";
+import firebase from '../../Config/firebase';
+import { useNavigation } from "@react-navigation/native"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 
-export default function EventoCad() {
+export default function EventCad() {
+  const [task, setTask] = useState([]);
+  const database = firebase.firestore();
+  const navigation = useNavigation();
+
+  function deleteTask(id) {
+    database.collection("Tasks").doc(id).delete();
+  }
+ 
+  useEffect(() => {
+    database.collection("Tasks").onSnapshot((query) => {
+      const list = [];
+      query.forEach((doc) => {
+        list.push({ ...doc.data(), id: doc.id });
+      });
+      setTask(list);
+    });
+  }, []);
+
   return (
-    <View style={styles.EventoCad}>
-        <View style={styles.Group925}>
-        <Image
-          style={styles.Logotipo}
-          source={{
-            uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-75%3A147?alt=media&token=f8cadfdb-0b46-4ca3-8708-34d904df26ae",
-          }}
-        />
-        <Text style={styles.TituloEventoCad}>Eventos Cadastrados</Text>
-      </View>
-      <View style={styles.HeaderPrincipal}>
-        <View style={styles.Cadastrados}>
-          <Text style={styles.TituloEventoRegistrado}>Juri Simulado</Text>
-          <Image
-            style={styles.IconEditar}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A119?alt=media&token=80cd863f-a40d-4b62-826b-29906c46afd8",
-            }}
-          />
-          <Image
-            style={styles.IconLixeira}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A123?alt=media&token=8a82433c-d3e7-45b4-a57b-974b98914b79",
-            }}
-          />
-        </View>
-        <View style={styles.LinhaInput} />
+    <View style={styles.container}>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={task}
+        renderItem={( { item } )=>{
+           return(
+          <View style={styles.Tasks}>
+           
+            <View>
+              <Text style={styles.DescriptionTask}>{item.description} </Text>
+             <TouchableOpacity
+             style={styles.updateTask}
+             onPress={()=>
+               navigation.navigate("Details",{
+                 id: item.id,
+                 description: item.description,
+               })
+             }
+             >
+              <MaterialCommunityIcons
+              name="pencil"
+              size={23}
+              color="blue"
+            >
+            </MaterialCommunityIcons>
+            </TouchableOpacity>
+            </View>  
+ 
+            <TouchableOpacity
+              style={styles.deleteTask}
+              onPress={() => {
+                deleteTask(item.id)
+              }}
+            >
+            <MaterialCommunityIcons
+              name="delete"
+              size={23}
+              color="#F92e6A"
+            >
+            </MaterialCommunityIcons>
+            </TouchableOpacity>
 
-        <View style={styles.Cadastrados}>
-          <Text style={styles.TituloEventoRegistrado}>Juri Simulado</Text>
-          <Image
-            style={styles.IconEditar}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A119?alt=media&token=80cd863f-a40d-4b62-826b-29906c46afd8",
-            }}
-          />
-          <Image
-            style={styles.IconLixeira}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A123?alt=media&token=8a82433c-d3e7-45b4-a57b-974b98914b79",
-            }}
-          />
-        </View>
-        <View style={styles.LinhaInput} />
-        <View style={styles.Cadastrados}>
-          <Text style={styles.TituloEventoRegistrado}>Juri Simulado</Text>
-          <Image
-            style={styles.IconEditar}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A119?alt=media&token=80cd863f-a40d-4b62-826b-29906c46afd8",
-            }}
-          />
-          <Image
-            style={styles.IconLixeira}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A123?alt=media&token=8a82433c-d3e7-45b4-a57b-974b98914b79",
-            }}
-          />
-        </View>
-        <View style={styles.LinhaInput} />
-        <View style={styles.Cadastrados}>
-          <Text style={styles.TituloEventoRegistrado}>Juri Simulado</Text>
-          <Image
-            style={styles.IconEditar}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A119?alt=media&token=80cd863f-a40d-4b62-826b-29906c46afd8",
-            }}
-          />
-          <Image
-            style={styles.IconLixeira}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A123?alt=media&token=8a82433c-d3e7-45b4-a57b-974b98914b79",
-            }}
-          />
-        </View>
-        <View style={styles.LinhaInput} />
-
-        <View style={styles.Cadastrados}>
-          <Text style={styles.TituloEventoRegistrado}>Juri Simulado</Text>
-          <Image
-            style={styles.IconEditar}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A119?alt=media&token=80cd863f-a40d-4b62-826b-29906c46afd8",
-            }}
-          />
-          <Image
-            style={styles.IconLixeira}
-            source={{
-              uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/ryei6pn9ndf-I75%3A151%3B4%3A123?alt=media&token=8a82433c-d3e7-45b4-a57b-974b98914b79",
-            }}
-          />
-        </View>
-        <View style={styles.LinhaInput} />
-
-      </View>
+          </View>
+          )
+        }}
+      />
+      <TouchableOpacity 
+        style={styles.AddEvent}
+        onPress={() => navigation.navigate("CadEvent")}
+      >
+        <Text style={styles.addButton}>Adicionar</Text>
+      </TouchableOpacity>
     </View>
   )
 }
 
+
 const styles = StyleSheet.create({
-  EventoCad: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    paddingTop: 40,
-    backgroundColor: "rgba(0,166,166,1)",
-  },
-  HeaderPrincipal: {
-    display: "flex",
-    flexDirection: "column",
-    marginTop: 50,
-    borderRadius: 30,
-    backgroundColor: "rgba(249,249,249,1)",
-    height: 680,
-  },
-  EventCadastrado: {
-    position: "absolute",
-    fontSize: 24,
-    fontWeight: "700",
-  },
-  Logotipo: {
-    width: 62,
-    height: 50,
-    left: 15,
-    marginBottom: 25,
-  },
-  TituloEventoCad: {
-    fontSize: 24,
-    fontWeight: "700",
-    top: 15,
-    left: 10,
-  },
-  InfoCad: {
-    display: "flex",
-    flexDirection: "row", 
-  },
-  IconEditar: {
-    width: 30,
-    height: 30,
-    marginRight: 11,
-  },
-  IconLixeira: {
-    width: 22,
-    height: 23,
-    top: 4,
-  },
-
-  Cadastrados: {
-    display: "flex",
-    flexDirection: "row",
-    marginBottom: 15,
-    marginTop: 50,
-  },
-  TituloEventoRegistrado: {
-    fontSize: 24,
-    fontWeight: "700",
-    marginRight: 156,
-    left: 10,
-  },
-
-  LinhaInput: {
-    backgroundColor: "rgba(0,166,166,1)",
-    width: 396,
-    height: 2,
-  },
-})
+  container: {
+    flex: 1,
+    backgroundColor:"#fff",
+    paddingTop: 20
+ },
+ Tasks:{
+  width:"100%",
+  flexDirection:"row",
+  justifyContent:"space-between",
+  marginTop:5
+ },
+ deleteTask:{
+   justifyContent:"center",
+   paddingLeft:15,
+   top:15,
+ },
+ updateTask: {
+left: 325,
+bottom: 10,
+ },
+ DescriptionTask:{
+  width:310,
+  alignContent:"flex-start",
+  backgroundColor:"#f5f5f5cf",
+  padding:13,
+  top: 30,
+  paddingHorizontal: 20,
+  borderRadius:10,
+  marginBottom: 5,
+  marginRight:15,
+  color:"#282b2db5",
+ },
+ AddEvent:{
+  width:350,
+  height:50,
+  position:"absolute",
+  bottom: 30,
+  left:20,
+  backgroundColor: "rgba(0,166,166,1)",
+  borderRadius:50,
+  justifyContent:"center",
+  alignItems: "center"
+ },
+ addButton:{
+  color:"#ffffff",
+  fontSize:25,
+  fontWeight:"bold",
+  width: 150,
+  left:25,
+ },
+});

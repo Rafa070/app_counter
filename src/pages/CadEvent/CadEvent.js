@@ -1,8 +1,21 @@
-import React from "react"
-import {SafeAreaView, StyleSheet, TextInput, Image, Text, View} from "react-native"
+import React, { useState } from "react";
+import {SafeAreaView, StyleSheet, TextInput, Image, Text, View, TouchableOpacity} from "react-native"
+import firebase from "firebase";
 
-export default function CadEvent() {
-    //const navigation - useNavigation();
+
+export default function CadEvent({ navigation }, props) {
+  const database = firebase.firestore();
+  const [description, setDescription] = useState(null);
+
+  function addTask(){
+    database.collection('Tasks').add({
+      description: description,
+      status: false
+    })
+    navigation.navigate("EventCad");
+  }
+
+
   return (
     <SafeAreaView style={styles.CadEvent}>
       <View style={styles.Group224}>
@@ -15,12 +28,20 @@ export default function CadEvent() {
         <Text style={styles.Titulo}>CADASTRE SEU EVENTO</Text>
         <View style={styles.InputNomeDoEvento}>
           <TextInput style={styles.Evento}
-          placeholder="Cadastrar Evento">
-          </TextInput>
+          placeholder="Cadastrar Evento"
+          onChangeText={setDescription}
+          value={description}
+         />
         </View>
-        <View style={styles.ButtonCadastrarEvento}>
+
+        <TouchableOpacity 
+        style={styles.ButtonCadastrarEvento}
+       onPress={()=>{
+        addTask()
+       }}
+       >
           <Text style={styles.CadastrarEvento}>Cadastrar</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   )

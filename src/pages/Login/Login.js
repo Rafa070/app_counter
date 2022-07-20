@@ -3,22 +3,11 @@ import {TextInput, StyleSheet, Image, Text, View, TouchableOpacity, KeyboardAvoi
 import { useNavigation } from "@react-navigation/native"
 import firebase from "../../Config/firebase"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
-import Loading from "../components/Loading"
-
 
 export default function Login({navigation}) {
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [errorLogin, setErrorLogin] = useState("");
-const {visible, setVisible} = useState(true);
-
-const Load = ()=>{
-  setVisible(true);
-  setTimeout(() => {
-    setVisible(false);
-    console.log('carregando')
-  }, 500);
-}
 
 const loginFirebase = ()=>{
 firebase.auth().signInWithEmailAndPassword(email, password)
@@ -54,8 +43,7 @@ const redefinirSenha = ()=>{
     <KeyboardAvoidingView 
    behavior={Platform.OS === "ios" ? "padding" : "height"}
     style={styles.Login}
-    keyboardVerticalOffset={80}
-    >
+    keyboardVerticalOffset={80} >
       <Image
         style={styles.Logotipo}
         source={{
@@ -110,7 +98,6 @@ style={styles.Entrar}
 onPress={loginFirebase}
 >
 <Text style={styles.ButtonEntrar}>Entrar</Text>
-<Loading visible={visible}/>
 </TouchableOpacity>
 }
 
