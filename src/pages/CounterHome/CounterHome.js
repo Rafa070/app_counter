@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
   },
-  
   TituloEvent: {
     fontSize: 30,
     fontWeight: "900",
@@ -132,7 +131,6 @@ const styles = StyleSheet.create({
     color: "rgba(67,66,66,1)",
     
   },
-
   IniciarEntradas: {
     display: "flex",
     flexDirection: "row",

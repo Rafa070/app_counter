@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native"
 
 export default function Welcome() {
 const navigation = useNavigation();
-
   return (
     <View style={styles.Welcome}>
       <View style={styles.Group917}>
@@ -27,7 +26,6 @@ const navigation = useNavigation();
     </View>
   )
 }
-
 const styles = StyleSheet.create({
   Welcome: {
     display: "flex",
@@ -52,14 +50,12 @@ const styles = StyleSheet.create({
     height: 226,
     marginBottom: 10,
   },
-
   BoasVindas: {
     display: "flex",
     flexDirection: "row",
     fontSize: 30,
     fontWeight: "800",
   },
-
   ButtonDeLogin: {
     display: "flex",
     flexDirection: "row",
@@ -83,7 +79,6 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "rgba(67,66,66,1)",
   },
-
   ButtonCadastro: {
     display: "flex",
     flexDirection: "row",

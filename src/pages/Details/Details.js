@@ -13,7 +13,6 @@ export default function Details({navigation, route}){
     })
     navigation.navigate("EventCad")
   }
-
   return(
     <View style={styles.container}>
       <Text style={styles.label}>Descrição</Text>
@@ -35,7 +34,6 @@ export default function Details({navigation, route}){
     </View>
   )
 }
-
 const styles = StyleSheet.create({
     container: { 
       flex:1,
@@ -75,6 +73,5 @@ const styles = StyleSheet.create({
         fontWeight:"bold",
         width: 150,
         left:45,
-    }
-    
+    } 
    });

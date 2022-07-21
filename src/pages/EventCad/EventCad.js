@@ -18,7 +18,6 @@ export default function EventCad() {
   function deleteTask(id) {
     database.collection("Tasks").doc(id).delete();
   }
- 
   useEffect(() => {
     database.collection("Tasks").onSnapshot((query) => {
       const list = [];
@@ -28,7 +27,6 @@ export default function EventCad() {
       setTask(list);
     });
   }, []);
-
   return (
     <View style={styles.container}>
       <FlatList
@@ -57,7 +55,6 @@ export default function EventCad() {
             </MaterialCommunityIcons>
             </TouchableOpacity>
             </View>  
- 
             <TouchableOpacity
               style={styles.deleteTask}
               onPress={() => {
@@ -71,7 +68,6 @@ export default function EventCad() {
             >
             </MaterialCommunityIcons>
             </TouchableOpacity>
-
           </View>
           )
         }}
@@ -85,8 +81,6 @@ export default function EventCad() {
     </View>
   )
 }
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

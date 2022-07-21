@@ -5,8 +5,7 @@ import HomeSvg from './../../assets/Home.svg'
 import firebase from "firebase";
 
 export default function Home() {
-  const navigation = useNavigation();
-
+const navigation = useNavigation();
 const Logout = () => {
   firebase.auth().signOut().then(() => {
     Alert.alert("Deslogado com Sucesso")
@@ -15,7 +14,6 @@ const Logout = () => {
     Alert.alert("Erro ao Deslogar")
   });
 }
-
   return (
     <View style={styles.Home}>
       <View style={styles.Index}>
@@ -36,7 +34,6 @@ const Logout = () => {
         <View style={styles.ImgHome}>
             <HomeSvg width={370} height={370}/>
         </View>
-
           <Text style={styles.TituloHome}>PEOPLE COUNTER</Text>
         </View>
         <Text style={styles.rodape}>
@@ -139,13 +136,11 @@ ImgHome: {
     width: 219,
     height: 38,
   },
-
   rodape: {
     fontSize: 16,
     fontWeight: "700",
     color: "rgba(157,157,157,1)",
   },
-
   Buttoms: {
     display: "flex",
     flexDirection: "row",
@@ -160,7 +155,6 @@ ImgHome: {
     paddingRight: 9,
     borderRadius: 15,
     backgroundColor: "rgba(255, 255, 255, 1)",
-   
     width: 360,
     height: 15,
   },
@@ -173,7 +167,6 @@ ImgHome: {
     left: 100,
     top: 76,
   },
-
   ButtomEvent: {
     display: "flex",
     flexDirection: "row",
@@ -187,8 +180,7 @@ ImgHome: {
     paddingLeft: 9,
     paddingRight: 9,
     borderRadius: 15,
-    backgroundColor: "rgba(255, 255, 255, 1)",
-   
+    backgroundColor: "rgba(255, 255, 255, 1)", 
     width: 360,
     height: 15,
   },

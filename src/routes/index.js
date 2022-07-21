@@ -10,7 +10,6 @@ import CounterHome from '../pages/CounterHome/CounterHome';
 import Details from '../pages/Details/Details';
 
 const Stack = createNativeStackNavigator();
-
 export default function Routes(){
   return(
      <Stack.Navigator>
@@ -19,7 +18,6 @@ export default function Routes(){
             component={Welcome}
             options={{ headerShown: false }}
          />
-
             <Stack.Screen
             name = "Login"
             component={Login}
@@ -41,13 +39,11 @@ export default function Routes(){
             component={EventCad}
             options={{ headerShown: false }}
          />
-
           <Stack.Screen
           name = "Details"
           component={Details}
           options={{ headerShown: false }}
           />
-
           <Stack.Screen
             name = "CounterHome"
             component={CounterHome}

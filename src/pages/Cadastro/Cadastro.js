@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from "react"
 import {KeyboardAvoidingView, TextInput, StyleSheet, Image, Text, View, TouchableOpacity, Alert} from "react-native"
-import { useNavigation } from "@react-navigation/native";
 import firebase from "../../Config/firebase";
-
-
 
 export default function Cadastro({navigation}) {
   //const [user, setName] = useState("");

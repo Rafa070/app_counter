@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react"
 import {TextInput, StyleSheet, Image, Text, View, TouchableOpacity, KeyboardAvoidingView, Alert, ActivityIndicator} from "react-native"
-import { useNavigation } from "@react-navigation/native"
 import firebase from "../../Config/firebase"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 
@@ -8,7 +7,6 @@ export default function Login({navigation}) {
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [errorLogin, setErrorLogin] = useState("");
-
 const loginFirebase = ()=>{
 firebase.auth().signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
@@ -22,9 +20,7 @@ firebase.auth().signInWithEmailAndPassword(email, password)
   });
 }
 useEffect(()=>{
-
 }, []);
-
 
 const redefinirSenha = ()=>{
   firebase.auth().sendPasswordResetEmail(email)
@@ -37,11 +33,8 @@ const redefinirSenha = ()=>{
     var errorMessage = error.message;
   });
 }
-
-
   return (
-    <KeyboardAvoidingView 
-   
+    <KeyboardAvoidingView  
     style={styles.Login}
     keyboardVerticalOffset={80} >
       <Image
@@ -70,7 +63,6 @@ const redefinirSenha = ()=>{
          />
       </View>
 
-
 {errorLogin === true
 ?
 <View style={styles.ErrorLogin}>
@@ -83,7 +75,6 @@ const redefinirSenha = ()=>{
 :
 <View/>
 }
-
 { email === "" || password === ""
 ?
 <TouchableOpacity
@@ -92,7 +83,6 @@ style={styles.Entrar}>
   <Text style={styles.ButtonEntrar} testID="entrar">Entrar</Text>
 </TouchableOpacity>
 :
-
 <TouchableOpacity
 style={styles.Entrar}
 onPress={loginFirebase}
@@ -100,7 +90,6 @@ onPress={loginFirebase}
 <Text style={styles.ButtonEntrar}>Entrar</Text>
 </TouchableOpacity>
 }
-
       <TouchableOpacity>
       <Text style={styles.EsqueceuSenha} onPress={redefinirSenha}>Esqueceu a Senha?</Text>
       </TouchableOpacity>

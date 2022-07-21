@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {SafeAreaView, StyleSheet, TextInput, Image, Text, View, TouchableOpacity} from "react-native"
 import firebase from "firebase";
 
-
 export default function CadEvent({ navigation }, props) {
   const database = firebase.firestore();
   const [description, setDescription] = useState(null);
@@ -14,8 +13,6 @@ export default function CadEvent({ navigation }, props) {
     })
     navigation.navigate("EventCad");
   }
-
-
   return (
     <SafeAreaView style={styles.CadEvent}>
       <View style={styles.Group224}>
