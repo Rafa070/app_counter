@@ -38,7 +38,6 @@ exports[`Teste de Snapshot Snapshot de App 1`] = `
           "top": 0,
         }
       }
-      swipeDirection="horizontal"
     >
       <RNSScreenStackHeaderConfig
         backButtonInCustomView={false}
@@ -70,8 +69,17 @@ exports[`Teste de Snapshot Snapshot de App 1`] = `
         <View
           style={
             Object {
-              "backgroundColor": "#21AEE4",
-              "flex": 1,
+              "alignItems": "flex-start",
+              "backgroundColor": "rgba(234,234,234,1)",
+              "display": "flex",
+              "flexDirection": "column",
+              "height": 926,
+              "justifyContent": "flex-start",
+              "paddingBottom": 166,
+              "paddingLeft": 40,
+              "paddingRight": 40,
+              "paddingTop": 203,
+              "width": 428,
             }
           }
         >
@@ -79,67 +87,37 @@ exports[`Teste de Snapshot Snapshot de App 1`] = `
             style={
               Object {
                 "alignItems": "center",
-                "backgroundColor": "#21AEE4",
-                "flex": 2,
-                "justifyContent": "center",
+                "display": "flex",
+                "flexDirection": "column",
               }
             }
           >
             <Image
-              collapsable={false}
-              forwardedRef={[Function]}
-              resizeMode="contain"
-              source={1}
-              style={
+              source={
                 Object {
-                  "backfaceVisibility": "visible",
-                  "opacity": 0,
-                  "transform": Array [
-                    Object {
-                      "perspective": 400,
-                    },
-                    Object {
-                      "rotateY": "90deg",
-                    },
-                  ],
-                  "width": "100%",
+                  "uri": "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/nu6yxatp2m-75%3A74?alt=media&token=33da3fdf-5561-441f-80e1-6569c84b68e4",
                 }
               }
-              testID="Logo"
-            />
-          </View>
-          <View
-            collapsable={false}
-            forwardedRef={[Function]}
-            style={
-              Object {
-                "backgroundColor": "#fff",
-                "borderTopLeftRadius": 25,
-                "borderTopRightRadius": 25,
-                "flex": 1,
-                "opacity": 0,
-                "paddingEnd": "5%",
-                "paddingStart": "5%",
-                "transform": Array [
-                  Object {
-                    "translateY": 100,
-                  },
-                ],
+              style={
+                Object {
+                  "height": 226,
+                  "marginBottom": 10,
+                  "width": 295,
+                }
               }
-            }
-          >
+              testID="imageWelcome"
+            />
             <Text
               style={
                 Object {
-                  "fontSize": 24,
-                  "fontWeight": "bold",
-                  "marginBottom": 12,
-                  "marginTop": 28,
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "fontSize": 30,
+                  "fontWeight": "800",
                 }
               }
-              testID="Titulo"
             >
-               MyTeacher, Conheça seus professores! 
+              Let's Count Together
             </Text>
             <View
               accessible={true}
@@ -154,20 +132,37 @@ exports[`Teste de Snapshot Snapshot de App 1`] = `
               onStartShouldSetResponder={[Function]}
               style={
                 Object {
+                  "alignItems": "center",
+                  "borderColor": "rgba(0,166,166,1)",
+                  "borderRadius": 15,
+                  "borderStyle": "solid",
+                  "borderWidth": 2,
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "height": 48,
+                  "justifyContent": "center",
+                  "marginBottom": 10,
+                  "marginTop": 35,
                   "opacity": 1,
+                  "paddingBottom": 8,
+                  "paddingLeft": 8,
+                  "paddingRight": 8,
+                  "paddingTop": 8,
+                  "width": 320,
                 }
               }
+              testID="btnLogin"
             >
               <Text
                 style={
                   Object {
-                    "color": "#a1a1a1",
-                    "textDecorationLine": "underline",
+                    "color": "rgba(67,66,66,1)",
+                    "fontSize": 18,
+                    "fontWeight": "800",
                   }
                 }
-                testID="btnTituloAcessarParaSaberMais"
               >
-                Acesse para saber mais 
+                Login
               </Text>
             </View>
             <View
@@ -184,29 +179,32 @@ exports[`Teste de Snapshot Snapshot de App 1`] = `
               style={
                 Object {
                   "alignItems": "center",
-                  "alignSelf": "center",
-                  "backgroundColor": "#21AEE4",
-                  "borderRadius": 50,
-                  "bottom": "15%",
+                  "backgroundColor": "rgba(0,166,166,1)",
+                  "borderRadius": 15,
+                  "display": "flex",
+                  "flexDirection": "row",
+                  "height": 48,
                   "justifyContent": "center",
                   "opacity": 1,
-                  "paddingVertical": 8,
-                  "position": "absolute",
-                  "width": "60%",
+                  "paddingBottom": 9,
+                  "paddingLeft": 9,
+                  "paddingRight": 9,
+                  "paddingTop": 9,
+                  "width": 320,
                 }
               }
+              testID="btnCadastro"
             >
               <Text
                 style={
                   Object {
-                    "color": "#fff",
+                    "color": "black",
                     "fontSize": 18,
-                    "fontWeight": "bold",
+                    "fontWeight": "800",
                   }
                 }
-                testID="btnAcessar"
               >
-                Acessar
+                Cadastro
               </Text>
             </View>
           </View>

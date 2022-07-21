@@ -41,7 +41,7 @@ const redefinirSenha = ()=>{
 
   return (
     <KeyboardAvoidingView 
-   behavior={Platform.OS === "ios" ? "padding" : "height"}
+   
     style={styles.Login}
     keyboardVerticalOffset={80} >
       <Image
@@ -89,7 +89,7 @@ const redefinirSenha = ()=>{
 <TouchableOpacity
 disabled={true}
 style={styles.Entrar}>
-  <Text style={styles.ButtonEntrar}>Entrar</Text>
+  <Text style={styles.ButtonEntrar} testID="entrar">Entrar</Text>
 </TouchableOpacity>
 :
 

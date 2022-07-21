@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import {KeyboardAvoidingView, TextInput, StyleSheet, Image, Text, View, TouchableOpacity, Alert} from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native";
 import firebase from "../../Config/firebase";
 
 
@@ -11,7 +11,6 @@ export default function Cadastro({navigation}) {
   const [password, setPassword] = useState("");
   //const [confirmPassword, setConfirmPassword] = useState("");
   const [errorCadastro, setErrorCadastro] = useState("");
-
 
 const cadastroFirebase = ()=>{
   firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -33,8 +32,7 @@ useEffect(()=>{
 }, []);
 
   return (
-    <KeyboardAvoidingView style={styles.Cadastro}
-    behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <KeyboardAvoidingView style={styles.Cadastro}>
       
       <Image
         style={styles.Logotipo}

@@ -13,13 +13,14 @@ const navigation = useNavigation();
           source={{
             uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/nu6yxatp2m-75%3A74?alt=media&token=33da3fdf-5561-441f-80e1-6569c84b68e4",
           }}
+          testID="imageWelcome"
         />
         <Text style={styles.BoasVindas}>Let's Count Together</Text>
-        <TouchableOpacity style={styles.ButtonDeLogin} onPress={ () => navigation.navigate('Login')}>
+        <TouchableOpacity style={styles.ButtonDeLogin} onPress={ () => navigation.navigate('Login')} testID="btnLogin">
           <Text style={styles.Login}>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.ButtonCadastro} onPress={ () => navigation.navigate('Cadastro')}>
+        <TouchableOpacity style={styles.ButtonCadastro} onPress={ () => navigation.navigate('Cadastro')}testID="btnCadastro">
           <Text style={styles.Cadastro}>Cadastro</Text>
         </TouchableOpacity>
       </View>
@@ -37,8 +38,7 @@ const styles = StyleSheet.create({
     paddingBottom: 166,
     paddingLeft: 40,
     paddingRight: 40,
-    borderRadius: 50,
-    backgroundColor: "rgba(234,234,234,1)",
+   backgroundColor: "rgba(234,234,234,1)",
     width: 428,
     height: 926,
   },

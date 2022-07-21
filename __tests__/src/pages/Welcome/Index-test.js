@@ -6,25 +6,19 @@ jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
 describe('Testes de Inicialização e Exibição', () => {
     it('Teste de Componentes da Tela Welcome', () => {
         const { getByTestId } = render(<App />);
-        expect(getByTestId("Logo")).toBeTruthy();
-        expect(getByTestId("Titulo")).toBeTruthy();
-        expect(getByTestId("btnTituloAcessarParaSaberMais")).toBeTruthy();
-        expect(getByTestId("btnAcessar")).toBeTruthy();
+        expect(getByTestId("imageWelcome")).toBeTruthy();
+        expect(getByTestId("btnCadastro")).toBeTruthy();
+        expect(getByTestId("btnLogin")).toBeTruthy();
     })
 })
 
 describe('Testes de Navegação', () => {
-  it('Navegação de Welcome para CourseList', () => {
-      const { getByText ,getByTestId} = render(<App />);
-
-      const botaoTituloAcessarParaSaberMais = (getByTestId("btnTituloAcessarParaSaberMais"));
-      fireEvent.press(botaoTituloAcessarParaSaberMais);
-      expect(getByText(" Alunos, lindos!!")).toBeTruthy();
+  it('Navegação de Welcome para Login', () => {
+      const {getByTestId} = render(<App />);
       
-      const botao = (getByTestId("btnAcessar"));
-      fireEvent.press(botao);
+      fireEvent.press(getByTestId("btnLogin"));
 
-      expect(getByText("MyTeacher")).toBeTruthy();
+      expect(getByTestId("entrar")).toBeTruthy();
 
   })
 })
