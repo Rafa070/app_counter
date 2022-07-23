@@ -42,6 +42,7 @@ const redefinirSenha = ()=>{
         source={{
           uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/31ag8rfohun-75%3A81?alt=media&token=9197ebd6-c6dd-4173-897a-38749e128a3b",
         }}
+        testID="imageLogoTipoLogin"
       />
       <View style={styles.Usuario}>
         <TextInput
@@ -50,6 +51,7 @@ const redefinirSenha = ()=>{
             type="text"
             onChangeText={(text) => setEmail(text)}
             value={email}
+            testID="inputEmail"
          />
       </View>
 
@@ -60,6 +62,7 @@ const redefinirSenha = ()=>{
          placeholder="Senha"
           onChangeText={(text) => setPassword(text)}
           value={password}
+          testID="inputSenha"
          />
       </View>
 
@@ -79,8 +82,8 @@ const redefinirSenha = ()=>{
 ?
 <TouchableOpacity
 disabled={true}
-style={styles.Entrar}>
-  <Text style={styles.ButtonEntrar} testID="entrar">Entrar</Text>
+style={styles.Entrar} testID="entrar">
+  <Text style={styles.ButtonEntrar}>Entrar</Text>
 </TouchableOpacity>
 :
 <TouchableOpacity
@@ -90,12 +93,12 @@ onPress={loginFirebase}
 <Text style={styles.ButtonEntrar}>Entrar</Text>
 </TouchableOpacity>
 }
-      <TouchableOpacity>
+      <TouchableOpacity testID="btnEsqueceuASenha">
       <Text style={styles.EsqueceuSenha} onPress={redefinirSenha}>Esqueceu a Senha?</Text>
       </TouchableOpacity>
 
       <Text style={styles.Cadastrar}>Não tem uma conta?</Text>
-      <TouchableOpacity onPress={ () => navigation.navigate('Cadastro')}>
+      <TouchableOpacity onPress={ () => navigation.navigate('Cadastro')} testID="btnCadastro2">
       <Text style={styles.Cadastre}>Cadastre-se</Text>
       </TouchableOpacity>
       
