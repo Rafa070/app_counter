@@ -46,6 +46,7 @@ useEffect(()=>{
           type="text"
           onChangeText={(text) => setEmail(text)}
           value={email}
+          testID="inputEmailCadastro"
           />
       </View>
 
@@ -55,7 +56,9 @@ useEffect(()=>{
          style={styles.PlaceholderInput} 
          onChangeText={(text) => setPassword(text)}
          value={password}
-          placeholder="Senha"/>
+         placeholder="Senha"
+         testID="inputSenhaCadastro"
+        />
       </View>
 
 
@@ -76,7 +79,7 @@ useEffect(()=>{
 ?
 <TouchableOpacity
 disabled={true}
-style={styles.Cadastrar}>
+style={styles.Cadastrar} testID="btnCadastrar">
 <Text style={styles.ButtonEntrar}>Cadastrar</Text>
 </TouchableOpacity>
 :
