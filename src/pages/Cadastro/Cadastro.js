@@ -36,6 +36,7 @@ useEffect(()=>{
         source={{
           uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/31ag8rfohun-75%3A81?alt=media&token=9197ebd6-c6dd-4173-897a-38749e128a3b",
         }}
+        testID="imageCadastroLogoTipo"
       />
       
       <View style={styles.Email}>

@@ -23,3 +23,12 @@ describe('Testes de Navegação', () => {
   })
 })
 
+describe('Teste de Navegação', () => {
+    it('Navegação de Welcome para Cadastro', () =>{
+        const {getByTestId} = render(<App/>);
+        fireEvent.press(getByTestId("btnCadastro"));
+        expect(getByTestId("imageCadastroLogoTipo")).toBeTruthy();
+    
+      })
+})
+
