@@ -19,9 +19,9 @@ describe ('Testes do componente Input', () => {
       fireEvent.press(getByTestId("btnCadastro"));
       fireEvent.press(getByTestId("inputEmailCadastro"));
     })
-    it('Teste de input Senha tela cadastro', () => {
-      const { getByTestId} = render(<App />);
-      fireEvent.press(getByTestId("btnCadastro"));
-      fireEvent.press(getByTestId("inputSenhaCadastro"));
-    })
+        it('Teste de input Senha tela cadastro', () => {
+        const { getByTestId} = render(<App />);
+        fireEvent.press(getByTestId("btnCadastro"));
+        fireEvent.press(getByTestId("inputSenhaCadastro"));
+        })
 })
