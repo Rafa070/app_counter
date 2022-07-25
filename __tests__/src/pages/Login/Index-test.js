@@ -15,17 +15,16 @@ describe('Testes de Inicialização e Exibição', () => {
         expect(getByTestId("btnCadastro2")).toBeTruthy();
     })
 })
-
 describe ('Testes do componente Input', () => {
     it('Teste de input email tela Login', () => {
       const { getByTestId} = render(<App />);
       fireEvent.press(getByTestId("btnLogin"));
       fireEvent.press(getByTestId("inputEmail"));
     })
-    it('Teste de input Senha tela Login', () => {
-      const { getByTestId} = render(<App />);
-      fireEvent.press(getByTestId("btnLogin"));
-      fireEvent.press(getByTestId("inputSenha"));
-    })
+        it('Teste de input Senha tela Login', () => {
+        const { getByTestId} = render(<App />);
+        fireEvent.press(getByTestId("btnLogin"));
+        fireEvent.press(getByTestId("inputSenha"));
+        })
 })
 
