@@ -30,7 +30,6 @@ export default function CadEvent({ navigation }, props) {
           value={description}
          />
         </View>
-
         <TouchableOpacity 
         style={styles.ButtonCadastrarEvento}
        onPress={()=>{
@@ -43,7 +42,6 @@ export default function CadEvent({ navigation }, props) {
     </SafeAreaView>
   )
 }
-
 const styles = StyleSheet.create({
   CadEvent: {
     display: "flex",
