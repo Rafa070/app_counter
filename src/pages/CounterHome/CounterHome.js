@@ -1,5 +1,32 @@
-import React from "react"
-import { StyleSheet, Image, Text, View, ImageBackground } from "react-native"
+import React from "react";
+import { StyleSheet, Image, Text, View, ImageBackground } from "react-native";
+import Paho from 'paho-mqtt';
+
+
+const client = new Paho.Client(
+    'broker.emqx.io',
+    8083,
+    '/'
+)
+
+client.connect({
+    onSuccess: function () {
+        console.log("connected")
+        client.subscribe("esp32/output")
+        client.subscribe("esp32/counter")
+        client.subscribe("World"); // As linhas a seguir sao uma tentativa de envio de mensagem
+        const message1 = new Paho.Message("Conexao OK"); // AGORA funcionando
+        message1.destinationName = "World"; // para testar
+
+        client.send(message1); // abrir o broker online
+    },
+    onFailure: function () {
+        console.log("Besti Besti")
+    },
+    //userName: 'emqx',
+    //password: 'public',
+    //useSSL: true,
+})
 
 export default function CounterEvent() {
   return (
