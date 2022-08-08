@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Image, Text, View, ImageBackground } from "react-native";
 import Paho from 'paho-mqtt';
 
+var topico;
+var mensagem;
 
 const client = new Paho.Client(
     'broker.emqx.io',
@@ -11,17 +13,18 @@ const client = new Paho.Client(
 
 client.connect({
     onSuccess: function () {
-        console.log("connected")
-        client.subscribe("esp32/output")
-        client.subscribe("esp32/counter")
-        client.subscribe("World"); // As linhas a seguir sao uma tentativa de envio de mensagem
-        const message1 = new Paho.Message("Conexao OK"); // AGORA funcionando
-        message1.destinationName = "World"; // para testar
+        console.log("conectado")
+        //client.subscribe("esp32/output")
+        //client.subscribe("esp32/counter")
+        client.subscribe("teste"); // As linhas a seguir sao uma tentativa de envio de mensagem
+      const message1 = new Paho.Message('Deu certoo')
+      message1.destinationName = "teste"
+      client.send(message1)
 
-        client.send(message1); // abrir o broker online
+
     },
     onFailure: function () {
-        console.log("Besti Besti")
+        console.log("Desconectado")
     },
     //userName: 'emqx',
     //password: 'public',
@@ -29,6 +32,15 @@ client.connect({
 })
 
 export default function CounterEvent() {
+const [msg, setmsg] = useState('')
+
+client.onMessageArrived = function (message) {
+  console.log('Topic:' + message.destinationName + ", Message:" + message.payloadString);
+  topico = message.destinationName;
+  message = message.payloadString;
+  setmsg(mensagem)
+}
+
   return (
     <View style={styles.CounterEvent}>
       <View style={styles.HeaderPricipal}>
@@ -45,7 +57,9 @@ export default function CounterEvent() {
           <View style={styles.InicioEntrada}>
             <View style={styles.CardInfo}>
               <Text style={styles.EntradaTexto}>ENTRADAS</Text>
-              <Text style={styles.Value}>00</Text>
+              <Text style={styles.Value}>
+                {topico}
+              </Text>
             </View>
             <View style={styles.IniciarEntradas}>
               <Text style={styles.BotaoIniciar}>INICIAR</Text>

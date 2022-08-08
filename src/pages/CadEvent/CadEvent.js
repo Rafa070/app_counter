@@ -11,7 +11,7 @@ export default function CadEvent({ navigation }, props) {
       description: description,
       status: false
     })
-    navigation.navigate("EventCad");
+    navigation.navigate("CounterHome");
   }
   return (
     <SafeAreaView style={styles.CadEvent}>
