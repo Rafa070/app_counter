@@ -1,48 +1,103 @@
-import React, { useState } from "react";
-import { StyleSheet, Image, Text, View, ImageBackground } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, Image, Text, View, FlatList } from "react-native";
+import firebase from '../../Config/firebase';
 import Paho from 'paho-mqtt';
+import { collection, getDocs } from "firebase/firestore";
 
-var topico;
+//var entrada; 
+var saida;
+var mensagem1
 var mensagem;
 
 const client = new Paho.Client(
-    'broker.emqx.io',
-    8083,
-    '/'
+  'broker.emqx.io',
+  8083,
+  '/'
 )
 
+try{
 client.connect({
     onSuccess: function () {
         console.log("conectado")
         //client.subscribe("esp32/output")
         //client.subscribe("esp32/counter")
         client.subscribe("teste"); // As linhas a seguir sao uma tentativa de envio de mensagem
-      const message1 = new Paho.Message('Deu certoo')
+      const message1 = new Paho.Message('connected')
       message1.destinationName = "teste"
       client.send(message1)
-
-
     },
     onFailure: function () {
         console.log("Desconectado")
     },
+  
     //userName: 'emqx',
     //password: 'public',
     //useSSL: true,
-})
+})} catch (error) {
+  alert(error);
+}
 
-export default function CounterEvent() {
-const [msg, setmsg] = useState('')
+
+export default function CounterEvent(props) {
+  const [task, setTask] = useState([]);
+  const database = firebase.firestore();
+  const [msg, setMsg] = useState('')
+  const [entrada, setEntrada] = useState(0)
+  const [saida1, setSaida1] = useState(0)
+  
+
+// Função para recebimento
+
+/*client.onMessageArrived = function (message) {
+  console.log('Topic:' + message.destinationName + ", Message:" + message.payloadString);
+  entrada = message.destinationName;
+  mensagem = message.payloadString;
+  setmsg(mensagem)
+  setmsgRec(mensagem1)
+}*/
+
+/*logica contabiliza 1 na entrada se receber 1. e contabiliza -1 na saida
+ if(count == 1){
+  count++;
+}else if(count == -1) {
+  count--;
+} */
+
+// Função para envio
 
 client.onMessageArrived = function (message) {
   console.log('Topic:' + message.destinationName + ", Message:" + message.payloadString);
-  topico = message.destinationName;
-  message = message.payloadString;
-  setmsg(mensagem)
+  saida = message.destinationName;
+  mensagem1 = message.payloadString;
+setMsg(mensagem1)
+
+
+ if(mensagem1 === 1){
+    setEntrada(entrada++);
+    setMsg(entrada)
+  }else {
+    mensagem1--;
+    setSaida1(saida1++);
+    setMsg(saida1)
+  }
+
 }
 
+useEffect(() => {
+
+//const q = query(citiesRef, where("desciption", "==", props.route.params.Evento));
+
+  database.collection("Tasks").onSnapshot((query) => {
+    const list = [];
+    query.forEach((doc) => {
+      list.push({ ...doc.data(), id: doc.id });
+    });
+    setTask(list);
+  });
+}, []);
+
   return (
-    <View style={styles.CounterEvent}>
+   <View style={styles.CounterEvent}>
       <View style={styles.HeaderPricipal}>
         <View style={styles.HeaderSecundario}>
           <Image
@@ -51,28 +106,32 @@ client.onMessageArrived = function (message) {
               uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/p63k3y1hvxe-75%3A145?alt=media&token=f894ae6f-6ae8-40bb-b3bc-93f2949751cf",
             }}
           />
-          <View>
-            <Text style={styles.TituloEvent}>JURI SIMULADO</Text>
-            </View>
+          <Text>M1:{entrada}</Text>
+        <Text>M2 Test:{saida}</Text>
+        <Text>M1:{msg}</Text>
+        <Text>M2 Test:{mensagem1}</Text>
+        <Text style={styles.TituloEvent}>{props.route.params.Evento}</Text>    
+         
           <View style={styles.InicioEntrada}>
             <View style={styles.CardInfo}>
-              <Text style={styles.EntradaTexto}>ENTRADAS</Text>
+            <Text style={styles.SaidaTexto}>ENTRADAS</Text>
+            <Text style={styles.Value}>{saida1}</Text>
+              
+              
+            
               <Text style={styles.Value}>
-                {topico}
+                {mensagem1}
               </Text>
-            </View>
-            <View style={styles.IniciarEntradas}>
-              <Text style={styles.BotaoIniciar}>INICIAR</Text>
             </View>
           </View>
           <View style={styles.HeaderPricipal}>
             <View style={styles.CardInfo}>
             <Text style={styles.SaidaTexto}>SAÍDAS</Text>
-              <Text style={styles.Value}>00</Text>
+              <Text style={styles.Value}>{saida1}</Text>
             </View>
           </View>
           <View style={styles.IniciarEntradas}>
-              <Text style={styles.BotaoIniciar}>INICIAR</Text>
+              <Text style={styles.BotaoIniciar}>ENCERRAR</Text>
             </View>
         </View>
       </View>
@@ -130,7 +189,7 @@ const styles = StyleSheet.create({
   },
   EntradaTexto: {
     textAlign: "center",
-    fontSize: 30,
+    fontSize: 10,
     top: 15,
     fontWeight: "900",
     color: "rgba(67,66,66,1)",
@@ -139,7 +198,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   Value: {
-    fontSize: 50,
+    fontSize: 30,
     fontWeight: "300",
     color: "rgba(67,66,66,1)",
   },
@@ -167,8 +226,8 @@ const styles = StyleSheet.create({
   SaidaTexto: {
     top: 12,
     textAlign: "center",
-    fontSize: 30,
-    fontWeight: "900",
+    fontSize: 15,
+    fontWeight: "600",
     color: "rgba(67,66,66,1)",
     
   },
@@ -180,7 +239,7 @@ const styles = StyleSheet.create({
     paddingTop: 9,
     paddingBottom: 9,
     borderRadius: 10,
-    backgroundColor: "rgba(0,166,166,1)",
+    backgroundColor: "red",
     width: 360,
   },
 })

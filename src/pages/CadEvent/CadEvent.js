@@ -9,9 +9,11 @@ export default function CadEvent({ navigation }, props) {
   function addTask(){
     database.collection('Tasks').add({
       description: description,
-      status: false
+      status: false,
+      entrance: 0,
+      exit: 0
     })
-    navigation.navigate("CounterHome");
+    navigation.navigate("CounterHome", {"Evento":description});
   }
   return (
     <SafeAreaView style={styles.CadEvent}>
