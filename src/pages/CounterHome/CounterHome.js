@@ -6,8 +6,8 @@ import { collection, getDocs } from "firebase/firestore";
 
 //var entrada; 
 var saida;
-var mensagem1
-var mensagem;
+var mensagem1;
+//var mensagem;
 
 const client = new Paho.Client(
   'broker.emqx.io',
@@ -37,7 +37,6 @@ client.connect({
   alert(error);
 }
 
-
 export default function CounterEvent(props) {
   const [task, setTask] = useState([]);
   const database = firebase.firestore();
@@ -45,7 +44,6 @@ export default function CounterEvent(props) {
   const [entrada, setEntrada] = useState(0)
   const [saida1, setSaida1] = useState(0)
   
-
 // Função para recebimento
 
 /*client.onMessageArrived = function (message) {
@@ -69,16 +67,16 @@ client.onMessageArrived = function (message) {
   console.log('Topic:' + message.destinationName + ", Message:" + message.payloadString);
   saida = message.destinationName;
   mensagem1 = message.payloadString;
-setMsg(mensagem1)
+  setMsg(mensagem1)
 
-
- if(mensagem1 === 1){
+  //console.log(mensagem)
+ if(msg == 1){
     setEntrada(entrada++);
-    setMsg(entrada)
+    //setMsg(entrada)
   }else {
-    mensagem1--;
+    //mensagem1--;
     setSaida1(saida1++);
-    setMsg(saida1)
+    //setMsg(saida1)
   }
 
 }
@@ -115,19 +113,17 @@ useEffect(() => {
           <View style={styles.InicioEntrada}>
             <View style={styles.CardInfo}>
             <Text style={styles.SaidaTexto}>ENTRADAS</Text>
-            <Text style={styles.Value}>{saida1}</Text>
+            <Text style={styles.Value}>{msg}</Text>
               
               
             
-              <Text style={styles.Value}>
-                {mensagem1}
-              </Text>
+             
             </View>
           </View>
           <View style={styles.HeaderPricipal}>
             <View style={styles.CardInfo}>
             <Text style={styles.SaidaTexto}>SAÍDAS</Text>
-              <Text style={styles.Value}>{saida1}</Text>
+              <Text style={styles.Value}>{mensagem1}</Text>
             </View>
           </View>
           <View style={styles.IniciarEntradas}>
