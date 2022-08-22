@@ -54,9 +54,6 @@ client.onMessageArrived = function (messageX) {
   entrada = messageX.destinationName;
   mensagem2 = messageX.payloadString;
   setMsg(mensagem2)
-  saida = messageY.destinationName;
-  mensagem1 = messageY.payloadString;
-  setMsg1(mensagem1);
 }
 
 client.onMessageArrived = function (messageY) {
