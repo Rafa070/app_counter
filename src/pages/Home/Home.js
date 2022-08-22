@@ -25,7 +25,6 @@ const Logout = () => {
             }}
           />
           <Text style={styles.TextBemVindo}>Bem vindo(a)</Text>
-
           <TouchableOpacity style={styles.StyleLogout} onPress={Logout}>
           <View style={styles.border}>
             <Text style={styles.textlogout}>Logout</Text>
@@ -43,7 +42,6 @@ const Logout = () => {
       <TouchableOpacity style={styles.Buttoms} onPress={ () => navigation.navigate('CadEvent')}>
             <Text style={styles.textbuttomcadastrar}>Cadastrar Evento</Text>
       </TouchableOpacity>
-
       <TouchableOpacity style={styles.ButtomEvent} onPress={ () => navigation.navigate('EventCad')}>
             <Text style={styles.textbuttomevent}>Eventos Cadastrados</Text>
       </TouchableOpacity>

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, Image, Text, View, FlatList } from "react-native";
 import firebase from '../../Config/firebase';
 import Paho from 'paho-mqtt';
-import { collection, getDocs } from "firebase/firestore";
+//import { collection, getDocs } from "firebase/firestore";
 
-//var entrada; 
+var entrada; 
+var mensagem2;
 var saida;
 var mensagem1;
 //var mensagem;
@@ -21,70 +22,62 @@ client.connect({
         console.log("conectado")
         //client.subscribe("esp32/output")
         //client.subscribe("esp32/counter")
-        client.subscribe("teste"); // As linhas a seguir sao uma tentativa de envio de mensagem
+        client.subscribe("teste");
+        client.subscribe("teste1");  // As linhas a seguir sao uma tentativa de envio de mensagem
       const message1 = new Paho.Message('connected')
+      const message2 = new Paho.Message("conectado")
       message1.destinationName = "teste"
+      message2.destinationName = "teste1"
       client.send(message1)
+      client.send(message2)
     },
     onFailure: function () {
         console.log("Desconectado")
-    },
-  
+    }, 
     //userName: 'emqx',
     //password: 'public',
     //useSSL: true,
 })} catch (error) {
   alert(error);
 }
-
 export default function CounterEvent(props) {
   const [task, setTask] = useState([]);
   const database = firebase.firestore();
   const [msg, setMsg] = useState('')
-  const [entrada, setEntrada] = useState(0)
-  const [saida1, setSaida1] = useState(0)
+  const [msg1, setMsg1] = useState('')
+
   
 // Função para recebimento
 
-/*client.onMessageArrived = function (message) {
-  console.log('Topic:' + message.destinationName + ", Message:" + message.payloadString);
-  entrada = message.destinationName;
-  mensagem = message.payloadString;
-  setmsg(mensagem)
-  setmsgRec(mensagem1)
-}*/
+client.onMessageArrived = function (messageX) {
+  console.log('Topic:' + messageX.destinationName + ", Message:" + messageX.payloadString);
+  entrada = messageX.destinationName;
+  mensagem2 = messageX.payloadString;
+  setMsg(mensagem2)
+  saida = messageY.destinationName;
+  mensagem1 = messageY.payloadString;
+  setMsg1(mensagem1);
+}
 
-/*logica contabiliza 1 na entrada se receber 1. e contabiliza -1 na saida
- if(count == 1){
-  count++;
-}else if(count == -1) {
-  count--;
-} */
-
-// Função para envio
-
-client.onMessageArrived = function (message) {
-  console.log('Topic:' + message.destinationName + ", Message:" + message.payloadString);
-  saida = message.destinationName;
-  mensagem1 = message.payloadString;
-  setMsg(mensagem1)
+client.onMessageArrived = function (messageY) {
+  console.log('Topic:' + messageY.destinationName + ", Message2:" + messageY.payloadString);
+  saida = messageY.destinationName;
+  mensagem1 = messageY.payloadString;
+  setMsg1(mensagem1);
 
   //console.log(mensagem)
- if(msg == 1){
+ /*if(msg == 1){
     setEntrada(entrada++);
     //setMsg(entrada)
   }else {
     //mensagem1--;
     setSaida1(saida1++);
     //setMsg(saida1)
-  }
-
+  }*/
 }
 
 useEffect(() => {
-
 //const q = query(citiesRef, where("desciption", "==", props.route.params.Evento));
-
   database.collection("Tasks").onSnapshot((query) => {
     const list = [];
     query.forEach((doc) => {
@@ -104,26 +97,21 @@ useEffect(() => {
               uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/p63k3y1hvxe-75%3A145?alt=media&token=f894ae6f-6ae8-40bb-b3bc-93f2949751cf",
             }}
           />
-          <Text>M1:{entrada}</Text>
-        <Text>M2 Test:{saida}</Text>
-        <Text>M1:{msg}</Text>
+          <Text>M1:{msg}</Text>
+        <Text>M2 Test:{msg1}</Text>
+        <Text>M1:{mensagem2}</Text>
         <Text>M2 Test:{mensagem1}</Text>
-        <Text style={styles.TituloEvent}>{props.route.params.Evento}</Text>    
-         
+        <Text style={styles.TituloEvent}>{props.route.params.Evento}</Text>          
           <View style={styles.InicioEntrada}>
             <View style={styles.CardInfo}>
             <Text style={styles.SaidaTexto}>ENTRADAS</Text>
-            <Text style={styles.Value}>{msg}</Text>
-              
-              
-            
-             
+            <Text style={styles.Value}>{mensagem1}</Text>
             </View>
           </View>
           <View style={styles.HeaderPricipal}>
             <View style={styles.CardInfo}>
             <Text style={styles.SaidaTexto}>SAÍDAS</Text>
-              <Text style={styles.Value}>{mensagem1}</Text>
+              <Text style={styles.Value}>{msg1}</Text>
             </View>
           </View>
           <View style={styles.IniciarEntradas}>

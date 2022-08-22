@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "rgba(67,66,66,1)",
   },
-
   ButtonCadastrarEvento: {
     display: "flex",
     flexDirection: "row",

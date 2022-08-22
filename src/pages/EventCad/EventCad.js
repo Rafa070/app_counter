@@ -34,8 +34,7 @@ export default function EventCad() {
         data={task}
         renderItem={( { item } )=>{
            return(
-          <View style={styles.Tasks}>
-           
+          <View style={styles.Tasks}> 
             <View>
               <Text style={styles.DescriptionTask}>{item.description} </Text>
              <TouchableOpacity

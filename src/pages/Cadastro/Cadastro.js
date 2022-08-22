@@ -9,7 +9,7 @@ export default function Cadastro({navigation}) {
   //const [confirmPassword, setConfirmPassword] = useState("");
   const [errorCadastro, setErrorCadastro] = useState("");
 
-const cadastroFirebase = ()=>{
+  const cadastroFirebase = ()=>{
   firebase.auth().createUserWithEmailAndPassword(email, password)
   .then((userCredential) => {
     Alert.alert("Sucesso", "Usuário cadastrado com sucesso")
@@ -25,7 +25,6 @@ const cadastroFirebase = ()=>{
 }
 
 useEffect(()=>{
-
 }, []);
 
   return (
@@ -37,8 +36,7 @@ useEffect(()=>{
           uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/31ag8rfohun-75%3A81?alt=media&token=9197ebd6-c6dd-4173-897a-38749e128a3b",
         }}
         testID="imageCadastroLogoTipo"
-      />
-      
+      />     
       <View style={styles.Email}>
         <TextInput
          style={styles.PlaceholderInput} 
@@ -49,7 +47,6 @@ useEffect(()=>{
           testID="inputEmailCadastro"
           />
       </View>
-
       <View style={styles.Senha}>
         <TextInput
         secureTextEntry={true}
@@ -60,7 +57,6 @@ useEffect(()=>{
          testID="inputSenhaCadastro"
         />
       </View>
-
 
 {errorCadastro === true
 ?
@@ -93,7 +89,6 @@ onPress={cadastroFirebase}
     </KeyboardAvoidingView>
   )
 }
-
 const styles = StyleSheet.create({
   Cadastro: {
     display: "flex",
@@ -189,7 +184,6 @@ const styles = StyleSheet.create({
     width: 366,
     height: 49,
   },*/
-
   Cadastrar: {
     display: "flex",
     flexDirection: "row",

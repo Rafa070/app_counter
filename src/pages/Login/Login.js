@@ -54,7 +54,6 @@ const redefinirSenha = ()=>{
             testID="inputEmail"
          />
       </View>
-
       <View style={styles.Senha}>
         <TextInput
          style={styles.PlaceholderInput}
@@ -149,7 +148,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 350,
   },
-
   Senha: {
     display: "flex",
     flexDirection: "row",
@@ -167,7 +165,6 @@ const styles = StyleSheet.create({
     width: 366,
     height: 49,
   },
-
   Entrar: {
     display: "flex",
     flexDirection: "row",
@@ -190,7 +187,6 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "rgba(255, 255, 255, 1)",
   },
-
   EsqueceuSenha: {
     position: "absolute",
     top: 571,
@@ -207,13 +203,11 @@ position: "absolute",
 top: 310,
 left: 30,
 },
-
 TextError: {
   fontSize: 24,
   fontWeight: "700",
   color:"red"
 },
-
   Cadastrar: {
   position: "absolute",
   top: 590,
