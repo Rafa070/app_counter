@@ -43,34 +43,31 @@ client.connect({
 export default function CounterEvent(props) {
   const [task, setTask] = useState([]);
   const database = firebase.firestore();
-  const [msg, setMsg] = useState('')
-  const [msg1, setMsg1] = useState('')
+  const [msg, setMsg] = useState("")
+  const [msg1, setMsg1] = useState("")
 
   
 // Função para recebimento
 
-client.onMessageArrived = function (messageX) {
+/*client.onMessageArrived = function (messageX) {
   console.log('Topic:' + messageX.destinationName + ", Message:" + messageX.payloadString);
   entrada = messageX.destinationName;
   mensagem2 = messageX.payloadString;
   setMsg(mensagem2)
-}
+}*/
 
 client.onMessageArrived = function (messageY) {
   console.log('Topic:' + messageY.destinationName + ", Message2:" + messageY.payloadString);
-  saida = messageY.destinationName;
-  mensagem1 = messageY.payloadString;
-  setMsg1(mensagem1);
+  //saida = messageY.destinationName;
+  //mensagem1 = messageY.payloadString;
+  //setMsg1(mensagem1);
 
-  //console.log(mensagem)
- /*if(msg == 1){
-    setEntrada(entrada++);
-    //setMsg(entrada)
-  }else {
-    //mensagem1--;
-    setSaida1(saida1++);
-    //setMsg(saida1)
-  }*/
+  if(messageY.destinationName == 'teste'){
+    setMsg1(messageY.payloadString);
+  }else if(messageY.destinationName == 'teste1'){
+    setMsg(messageY.payloadString);
+  }
+
 }
 
 useEffect(() => {
@@ -94,26 +91,20 @@ useEffect(() => {
               uri: "https://firebasestorage.googleapis.com/v0/b/unify-bc2ad.appspot.com/o/p63k3y1hvxe-75%3A145?alt=media&token=f894ae6f-6ae8-40bb-b3bc-93f2949751cf",
             }}
           />
-          <Text>M1:{msg}</Text>
-        <Text>M2 Test:{msg1}</Text>
-        <Text>M1:{mensagem2}</Text>
-        <Text>M2 Test:{mensagem1}</Text>
         <Text style={styles.TituloEvent}>{props.route.params.Evento}</Text>          
           <View style={styles.InicioEntrada}>
             <View style={styles.CardInfo}>
             <Text style={styles.SaidaTexto}>ENTRADAS</Text>
-            <Text style={styles.Value}>{mensagem1}</Text>
+            <Text style={styles.Value}>{msg1}</Text>
             </View>
           </View>
           <View style={styles.HeaderPricipal}>
             <View style={styles.CardInfo}>
             <Text style={styles.SaidaTexto}>SAÍDAS</Text>
-              <Text style={styles.Value}>{msg1}</Text>
+              <Text style={styles.Value}>{msg}</Text>
             </View>
           </View>
-          <View style={styles.IniciarEntradas}>
-              <Text style={styles.BotaoIniciar}>ENCERRAR</Text>
-            </View>
+        
         </View>
       </View>
     </View>
